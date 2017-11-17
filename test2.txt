@@ -1,0 +1,62 @@
+1-What are three things you can do in order to speed up a website's load time? (Enumere tres cosas que se pueden hacer para aumentarle la velocidad a una pagina web) (20pts)
+
+    - combine multiple style pages into one.
+    - reduce scripts and load them after html and css
+    - compress files for faster travel time
+
+*************************************************************************************************************************************************
+
+2-Go to the Google PageSpeed insights page and analyze ncl.com Choose three of the shortcomings this website has and explain the specific tools and workflows we discussed in class which could help this website address these shortcomings. (Dirijase a la herramienta Google PageSpeed Insights y analice el sitio ncl.com. Basado en lo que dice la herramienta, enumere tres medidas especificas que discutimos en clase para corregir tres de los problemas senalados por la herramienta PageSpeed Insights)(20pts)
+
+      - Eliminate render-blocking JavaScript and CSS in above-the-fold (what shows up when the page first loads) content
+      - avoid webpage redirects when possible
+      - Set an expiry date or a maximum age in the HTTP headers for static resources to instruct the browser to load
+          previously downloaded resources from local disk rather than over the network.  
+
+**************************************************************************************************************************************************
+
+3-What is the render tree?(20pts)
+
+    It's the structure that captures the content and properties of the html and all relationships between the nodes once all tokens are consumed. This is
+ not to be confused with the DOM tree. While the DOM tree is essentially the tree containing all of your HTML elements/nodes, the render tree is a
+ culmination of the DOM and CSSOM trees and is what visibly shows up on your page.
+**************************************************************************************************************************************************
+
+4-Explain the process of a how a website loads in terms of the internal data structures built and used by the browser (DOM, CSSOM, etc).(20pts)
+
+- First you have the start and end tags <> with certain characters in side- these characters get converted into tokens, be it html, head, body etc.
+ The browser emits a token when it reads these characters. Another process consumes the tokens and converts them into nodes. The conversion of 
+ character(or html response)-token-nodes creates the DOM or Document Object Model. This DOM captures the content and properties of html and all
+ the relationships between the nodes. the nodes contain all relevant information about the html element. The nodes are connected to the DOM tree
+ based on a token hierarchy-html is read from top to bottom. Then a similar process takes place in creating the CSSOM or the CSS Object Model.
+ It also takes in CSS characters and the parser converts tokens into nodes. Examples are body and paragraph elements. CSS is render blocking in
+ that it will block all other rendering until it receives all CSS information. This is why it is important to either defer or async JavaScript,
+ compress images and be careful of where and how other elements of your page are placed in the html hierarchy. the less render blocking your page has,
+ the less round trips the browser has to take in order to fetch those elements and therefore, the faster your page will load.
+
+**************************************************************************************************************************************************
+
+5-Clone the repository named "Asteroids" from www.github.com/fvitech. Once you do this, complete the following steps:
+
+Fork the github repo so you have your own fork (5pts)
+Clone your fork of the Asteroids repository (5pts)
+Re-organize the files so image files are inside an img folder and js files are inside a js folder. (5pt)
+Initialize your local version of the project as a node project (5pts)
+Install webpack, webpack dev server, and all the required loaders so that you can have a single code bundle output to a file named prod.js (10pts)
+The code is a bit messy, with many things in the same file. Modularize it by doing the following:
+Start by copying the contents of the codingIsFun.js file to a new file called main.js
+Make this new file your webpack entry point
+Create an npm script to bundle your js code and fire the webpack dev server.(10pts)
+The Asteroids initialization code (which is marked by the comment which says GENERATE ASTEROIDS IN HTML DOCUMENT) should be in a separate file named createAsteroids.js. You will need to wrap this code in a function, export the function, then import this function and call it from within main.js (10pts)
+The auxiliary functions keyDown and keyUp should be moved to a separate file named controls.js.
+The binding of the keyDown and keyUp events is currently being done in an attribute to the body tag. Change this by using JavaScript's document.addEventListener function.
+Your controls.js file should export a single function that configures the controls when called. Import and call this function from your main.js file. (10pts)
+The controls file binds key handlers that modify variables that are no longer present in the new file. You can fix this by making said variables global or by moving them from main.js into controls.js and then exporting them from there.
+No more than one script link is allowed in the main index.html. The only script that should be linked from index.html is prod.js
+Use a webpack uglify plugin to minify the code (20 point bonus)
+Upload your code to fvi-grad.com under your username (10pts)
+
+6-In the end, all your JavaScript code should be inside a file named prod.js, which was created by using webpack. Nothing else should be linked to your html.
+
+7-Notice that whenever there is a collision, the audio is being loaded and played. This slows down performance. Modify the code so that it loads the audio only once, stores it as a global variable, and whenever there is a collision, you use this global variable to reset the audio's currentTime to zero and then play it. (20pts)
+
